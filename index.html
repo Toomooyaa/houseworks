@@ -1,107 +1,108 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!DOCTYPE html>   < !DOCTYPE html>   < !DOCTYPE html>   < !DOCTYPE html>   < !DOCTYPE html>   < !DOCTYPE html>   < !DOCTYPE html>
+<   超文本标记语言html   < css长= " zh-CN" > lang="zh-CN">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>家务军功榜</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+SC:wght@400;700;900&display=swap"
-        rel="stylesheet">
-    <style>
-        :root {
-            /* Premium Light Palette */
-            --bg-color: #f1f5f9;
-            --card-bg: rgba(255, 255, 255, 0.85);
-            --card-border: rgba(255, 255, 255, 0.5);
-            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
-            --text-primary: #0f172a;
-            --text-secondary: #121820;
-            --accent-color: #2563eb;
-            --success-color: #059669;
-            --danger-color: #dc2626;
+<head>   < head>
+       <meta   元 charset="UTF-8"><   元meta charset="UTF-8">
+       < meta名字= " viewport"<   元meta name="viewport"
+        Content ="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"；content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+       <title>家务军功榜</title><title>家务军功榜</title>
+    <   链接link rel="preconnect" href="https://fonts.googleapis.com"><link   链接   链接 rel="preconnect" href="https://fonts.googleapis.com">
+    <   链接link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link   链接   链接 rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+       <   链接链接   链接<link
+        family=Noto Sans SC:wght@400;700;900“display=swap”href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+SC:wght@400;700;900&display=swap"
+        rel="stylesheet">   rel="stylesheet">
+       < style><style>
+        :   :根{root {
+            /*高级调色板*//* Premium Light Palette */
+               ——bg-color: # f1f5f9;--bg-color: #f1f5f9;
+            —card-bg: rgba(255,255,255,0.85)；--card-bg: rgba(255, 255, 255, 0.85);
+            ——card-border: rgba(255,255,255,0.5)；--card-border: rgba(255, 255, 255, 0.5);
+            ——card-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.05)；--card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+               ——text-primary: # 0 f172a;--text-primary: #0f172a;
+            ——text-secondary: # 121820;--text-secondary: #121820;
+               -颜色:# 2563 eb;--accent-color: #2563eb;
+            ——success-color: # 059669;--success-color: #059669;
+               ——danger-color: # dc2626;--danger-color: #dc2626;
 
-            /* High-End Rank Colors */
-            --rank-special: #d97706; /* Amber 600 */
-            --rank-first: #0891b2;  /* Cyan 600 */
-            --rank-second: #7c3aed; /* Violet 600 */
-            --rank-third: #475569;  /* Slate 600 */
+            /*高端等级颜色*//* High-End Rank Colors */
+            ——rank-special: # d97706;/*琥珀600 */--rank-special: #d97706; /* Amber 600 */
+            ——排名第一:# 0891 b2;/*青色600 */--rank-first: #0891b2;  /* Cyan 600 */
+            ——排:# 7 c3aed;/*紫色600 */--rank-second: #7c3aed; /* Violet 600 */
+            ——位于第三:# 475569;/* Slate 600 */--rank-third: #475569;  /* Slate 600 */
 
-            --special-glow: 0 10px 20px rgba(217, 119, 6, 0.15);
-            --first-glow: 0 10px 20px rgba(8, 145, 178, 0.15);
-            --second-glow: 0 10px 20px rgba(124, 58, 237, 0.15);
-            --third-glow: 0 5px 15px rgba(71, 85, 105, 0.1);
+            ——特殊辉光：0 10px 20px rgba(217,119,6,0.15)；--special-glow   ,特殊荣耀: 0 10px 20px rgba(217, 119, 6, 0.15);
+            —first-glow: 0 10px 20px rgba(8,145,178,0.15)；--first-glow: 0 10px 20px rgba(8, 145, 178, 0.15);
+            —second-glow: 0 10px 20px rgba(124, 58, 237, 0.15)；--second-glow: 0 10px 20px rgba(124, 58, 237, 0.15);
+            —third-glow: 0 5px 15px rgba(71, 85, 105, 0.1)；--third-glow: 0 5px 15px rgba(71, 85, 105, 0.1);
         }
 
         * {
             box-sizing: border-box;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
+            user-select: none;   用户选择:没有;
+            -webkit-tap-highlight-color: transparent;-webkit-tap-highlight-color:透明;
         }
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Noto Sans SC', sans-serif;
-            background-color: var(--bg-color);
-            background-image: 
-                radial-gradient(circle at 50% 0%, #ffffff 0%, transparent 70%),
-                radial-gradient(circle at 0% 100%, #e2e8f0 0%, transparent 40%);
-            color: var(--text-primary);
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
+        body {   身体{
+            margin   保证金   保证金: 0;   保证金:0;
+            padding   填充: 0;   填充:0;
+            font-family: 'Noto Sans SC', sans-serif;font-family：宋体；
+            background-color: var(--bg-color);background - color: var(——bg-color);
+            background-image:    背景图片:
+                radial-gradient(circle   圆   圆 at   在   在   在 50% 0%, #ffffff 0%, transparent 70%),径向梯度（圆形50%，#ffffff 0%，透明70%），
+                radial-gradient(circle   圆 at   在   在   在 0% 100%, #e2e8f0 0%, transparent 40%);径向梯度（圆形0% 100%，#e2e8f0 0%，透明度40%）；
+            color: var(--text-primary);颜色:var(——text-primary);
+            height   高度   高度: 100vh;
+            overflow: hidden;   溢出:隐藏;
+            display: flex;   显示:flex;
+            flex-direction: column;   flex-direction:列;
         }
 
-        /* --- Header --- */
+        /* --- Header --- *//*——头文件——*/
         header {
-            padding: 15px 20px 10px;
-            text-align: center;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(10px);
+            padding   填充   填充: 15px 20px 10px;   Padding   填充   填充: 15px 20px 10px；
+            text-align: center;   text-align:中心;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);Border-bottom: 1px solid rgba(0,0,0,0.05)；
+            background: rgba(255, 255, 255, 0.5);背景：rgba(255, 255, 255, 0.5)；
+            backdrop-filter: blur(10px);backdrop-filter:模糊(10 px);
         }
 
         h1 {
-            margin: 0;
-            font-size: 24px;
-            font-weight: 900;
-            letter-spacing: 2px;
-            background: linear-gradient(to right, #2563eb, #7c3aed);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-family: 'Orbitron', 'Noto Sans SC', sans-serif;
+            margin   保证金   保证金: 0;   保证金:0;
+            font-size: 24px;   字体大小:24 px;
+            font-weight: 900;   粗细:900;
+            letter-spacing: 2   < !DOCTYPE html   超文本标记语言>px;   字母间距:2 px;
+            background: linear-gradient(to right, #2563eb, #7c3aed);背景：线性渐变（向右，#2563eb, #7c3aed）；
+            -webkit-background-clip: text;-webkit-background-clip:文本;
+            -webkit-text-fill-color: transparent;-webkit-text-fill-color:透明;
+            font-family: 'Orbitron', 'Noto Sans SC', sans-serif;font-family: 'Orbitron', 'Noto Sans ', Sans -serif；
         }
 
-        /* --- Dashboard --- */
-        #dashboard {
+        /* --- Dashboard --- *//*——仪表盘——*/
+        #dashboard {   #仪表盘{
             flex: 1;
-            padding: 15px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+            padding: 15px;   填充:15 px;
+            overflow-y: auto;   overflow-y:汽车;
+            display: flex;   显示:flex;
+            flex-direction: column;   flex-direction:列;
+            gap: 12px;   差距:12 px;
+            margin-bottom: 50px;
         }
 
-        .merit-summary {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
+        .merit-summary {   ．merit-summary {
+            display: grid;   显示:网格;
+            grid-template-columns: 1fr 1fr;网格模板列：1fr 1fr；
+            gap: 12px;   差距:12 px;
         }
 
-        .merit-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            padding: 8px;
+        .merit-card {   ．merit-card {
+            background: var(--card-bg);背景:var(——card-bg);
+            backdrop-filter: blur(20px);backdrop-filter:模糊(20 px);
+            padding   填充: 8px;   填充:8 px;
             border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            display: flex;   显示:flex;
+            flex-direction: column;   flex-direction:列;
+            align-items: center;   对齐项目:中心;
+            justify-content: center;   justify-content:中心;
             text-align: center;
             position: relative;
             border: 1px solid var(--card-border);
@@ -1065,3 +1066,4 @@
 </body>
 
 </html>
+
