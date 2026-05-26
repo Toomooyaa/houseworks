@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
@@ -8,193 +8,307 @@
     <title>家务军功榜</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+SC:wght@400;700;900&display=swap"
-        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
     <div id="appShell">
-    <header>
-        <h1>家务军功榜</h1>
-        <div class="scale-control">
-            <button class="scale-btn" onclick="adjustAppScale(-5)" aria-label="缩小">-</button>
-            <button class="scale-value" id="scaleValue" onclick="setAppScale(100)">100%</button>
-            <button class="scale-btn" onclick="adjustAppScale(5)" aria-label="放大">+</button>
-        </div>
-    </header>
+        <header>
+            <div class="header-title-area">
+                <h1>家务军功榜</h1>
+                <div class="hero-subtitle">
+                    <span>记录 <strong id="heroNameDisplay">猪猪宝</strong> 的辛劳付出</span>
+                    <span class="edit-hero-btn" onclick="editHeroName()" title="修改昵称" style="cursor: pointer; margin-left: 4px;">✏️</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <!-- 直接在主页表面调缩放，直观观察效果 -->
+                <div class="scale-control" style="display: flex; align-items: center; gap: 2px;">
+                    <button class="scale-btn" onclick="adjustAppScale(-5)" aria-label="缩小">-</button>
+                    <span id="scaleValue" style="min-width: 38px; text-align: center; font-size:11px; font-weight:900; font-family:'Outfit';">100%</span>
+                    <button class="scale-btn" onclick="adjustAppScale(5)" aria-label="放大">+</button>
+                </div>
+                <button class="header-btn theme-toggle-btn" onclick="toggleTheme()" aria-label="切换主题" id="themeToggleBtn">
+                    <!-- 默认展示太阳（浅色模式），在JS中动态切换 -->
+                    <svg viewBox="0 0 24 24" id="theme-icon">
+                        <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.01c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
 
-    <div id="dashboard">
-        <!-- 功勋卡片 -->
-        <div class="merit-summary">
-            <!-- 特等功 -->
-            <div class="merit-card special">
-                <div class="merit-count" id="count-special">0</div>
-                <div class="merit-label">特等功</div>
-                <div class="merit-footer">
-                    <div class="next-level-progress">终极荣誉</div>
+        <div id="dashboard">
+            <!-- 功勋卡片网格 -->
+            <div class="merit-summary">
+                <!-- 特等功 -->
+                <div class="merit-card special">
+                    <div class="badge-container">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="32" cy="32" r="28" fill="url(#special-grad)" stroke="#f59e0b" stroke-width="2"/>
+                            <path d="M18 42 L24 24 L32 34 L40 24 L46 42 Z" fill="#fbbf24" stroke="#d97706" stroke-width="2" stroke-linejoin="round"/>
+                            <circle cx="24" cy="20" r="2" fill="#d97706"/>
+                            <circle cx="32" cy="30" r="2" fill="#d97706"/>
+                            <circle cx="40" cy="20" r="2" fill="#d97706"/>
+                            <path d="M22 46 H42" stroke="#d97706" stroke-width="3" stroke-linecap="round"/>
+                            <defs>
+                                <radialGradient id="special-grad" cx="50%" cy="30%" r="70%">
+                                    <stop offset="0%" stop-color="#ffffff"/>
+                                    <stop offset="100%" stop-color="#fef3c7"/>
+                                </radialGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="merit-info">
+                        <div class="merit-count" id="count-special">0</div>
+                        <div class="merit-label">特等功</div>
+                    </div>
+                    <div class="next-level-progress">终极荣誉榜</div>
+                </div>
 
+                <!-- 一等功 -->
+                <div class="merit-card first">
+                    <div class="badge-container">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="32" cy="32" r="28" fill="url(#first-grad)" stroke="#06b6d4" stroke-width="2"/>
+                            <path d="M32 16 L36.5 27.5 H48 L38.5 34.5 L42 46 L32 39 L22 46 L25.5 34.5 L16 27.5 H27.5 Z" fill="#22d3ee" stroke="#0891b2" stroke-width="2" stroke-linejoin="round"/>
+                            <defs>
+                                <radialGradient id="first-grad" cx="50%" cy="30%" r="70%">
+                                    <stop offset="0%" stop-color="#ffffff"/>
+                                    <stop offset="100%" stop-color="#cffafe"/>
+                                </radialGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="merit-info">
+                        <div class="merit-count" id="count-first">0</div>
+                        <div class="merit-label">一等功</div>
+                    </div>
+                    <div class="next-level-progress" id="progress-first">差 3 个可兑特等功</div>
+                </div>
+
+                <!-- 二等功 -->
+                <div class="merit-card second">
+                    <div class="badge-container">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="32" cy="32" r="28" fill="url(#second-grad)" stroke="#8b5cf6" stroke-width="2"/>
+                            <path d="M24 22 H40 V30 C40 35 36 38 32 38 C28 38 24 35 24 30 Z" fill="#a78bfa" stroke="#7c3aed" stroke-width="2" stroke-linejoin="round"/>
+                            <path d="M28 38 V44 H36 V38" stroke="#7c3aed" stroke-width="2"/>
+                            <path d="M26 44 H38" stroke="#7c3aed" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M24 25 H20 V29 C20 31 22 32 24 32" stroke="#7c3aed" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M40 25 H44 V29 C44 31 42 32 40 32" stroke="#7c3aed" stroke-width="2" stroke-linecap="round"/>
+                            <defs>
+                                <radialGradient id="second-grad" cx="50%" cy="30%" r="70%">
+                                    <stop offset="0%" stop-color="#ffffff"/>
+                                    <stop offset="100%" stop-color="#ede9fe"/>
+                                </radialGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="merit-info">
+                        <div class="merit-count" id="count-second">0</div>
+                        <div class="merit-label">二等功</div>
+                    </div>
+                    <div class="next-level-progress" id="progress-second">差 5 个可兑一等功</div>
+                </div>
+
+                <!-- 三等功 -->
+                <div class="merit-card third">
+                    <div class="badge-container">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="32" cy="32" r="28" fill="url(#third-grad)" stroke="#64748b" stroke-width="2"/>
+                            <path d="M24 24 V32 C24 37 32 42 32 42 C32 42 40 37 40 32 V24 Z" fill="#94a3b8" stroke="#475569" stroke-width="2" stroke-linejoin="round"/>
+                            <path d="M20 20 C22 28 28 30 30 38" stroke="#475569" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M44 20 C42 28 36 30 34 38" stroke="#475569" stroke-width="1.5" stroke-linecap="round"/>
+                            <defs>
+                                <radialGradient id="third-grad" cx="50%" cy="30%" r="70%">
+                                    <stop offset="0%" stop-color="#ffffff"/>
+                                    <stop offset="100%" stop-color="#e2e8f0"/>
+                                </radialGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="merit-info">
+                        <div class="merit-count" id="count-third">0</div>
+                        <div class="merit-label">三等功</div>
+                    </div>
+                    <div class="next-level-progress" id="progress-third">差 10 个可兑二等功</div>
                 </div>
             </div>
 
-            <!-- 一等功 -->
-            <div class="merit-card first">
-                <div class="merit-count" id="count-first">0</div>
-                <div class="merit-label">一等功</div>
-
-                    <div class="next-level-progress" id="progress-first">差3 个一等功 可兑换 特等功</div>
-
-
-            </div>
-
-            <!-- 二等功 -->
-            <div class="merit-card second">
-                <div class="merit-count" id="count-second">0</div>
-                <div class="merit-label">二等功</div>
-                <div class="next-level-progress" id="progress-second">差5 个二等功 可兑换 一等功</div>
-            </div>
-
-            <!-- 三等功 -->
-            <div class="merit-card third">
-                <div class="merit-count" id="count-third">0</div>
-                <div class="merit-label">三等功</div>
-                <div class="next-level-progress" id="progress-third">差10 个三等功 可兑换 二等功</div>
-            </div>
-        </div>
-
-        <div class="total-banner">
-            军功总值: <strong id="total-merits">0</strong> (折合三等功)
-        </div>
-
-        <!-- 操作区 -->
-        <div class="action-grid">
-            <div class="action-btn primary" onclick="showModal('completeTaskModal')">
-                <svg viewBox="0 0 24 24">
-                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                </svg>
-                <span>完成家务 (领赏)</span>
-            </div>
-
-            <div class="action-btn" onclick="openRedeem()">
-                <svg viewBox="0 0 24 24">
-                    <path
-                        d="M20 7h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35L12 5.02l-.5-.67C10.96 3.54 10.05 3 9 3 7.34 3 6 4.34 6 6c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 20c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V9c0-1.11-.89-2-2-2zM15 5c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 5c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V9h5.08L7 11.83 8.62 13 12 8.4l3.38 4.6L17 11.83 14.92 9H20v6z" />
-                </svg>
-                <span>兑换功勋</span>
-            </div>
-
-            <div class="action-btn" onclick="showModal('historyModal')">
-                <svg viewBox="0 0 24 24">
-                    <path
-                        d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.14.72-1.21-3.5-1.75V8H12z" />
-                </svg>
-                <span>积分历史</span>
-            </div>
-
-            <div class="action-btn" onclick="showModal('manageModal')">
-                <svg viewBox="0 0 24 24">
-                    <path
-                        d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
-                </svg>
-                <span>家务管理</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- 弹窗 -->
-
-    <!-- 完成家务弹窗 -->
-    <div id="completeTaskModal" class="modal">
-        <div class="modal-header">
-            <h2 class="modal-title">选择已完成任务</h2>
-            <button class="close-btn" onclick="closeModal('completeTaskModal')">&times;</button>
-        </div>
-        <div class="modal-content" id="taskList"></div>
-    </div>
-
-    <!-- 历史记录弹窗 -->
-    <div id="historyModal" class="modal">
-        <div class="modal-header">
-            <h2 class="modal-title">历史记录</h2>
-            <button class="close-btn" onclick="closeModal('historyModal')">&times;</button>
-        </div>
-        <div class="modal-content">
-            <div class="io-toolbar">
-                <button class="io-btn" onclick="exportHistory()">导出记录</button>
-                <button class="io-btn" onclick="triggerImport('history')">导入记录</button>
-            </div>
-            <div id="historyList"></div>
-            <div style="padding: 20px 0; text-align: center;">
-                <button class="io-btn" style="color:var(--danger-color); width: 100%; border-color: rgba(220, 38, 38, 0.2); background: rgba(220, 38, 38, 0.05);" onclick="clearAllHistory()">一键删除所有历史记录</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- 家务管理弹窗 -->
-    <div id="manageModal" class="modal">
-        <div class="modal-header">
-            <h2 class="modal-title">家务管理</h2>
-            <button class="close-btn" onclick="closeModal('manageModal')">&times;</button>
-        </div>
-
-        <div class="modal-content">
-            <div class="io-toolbar">
-                <button class="io-btn" onclick="exportTasks()">导出配置</button>
-                <button class="io-btn" onclick="triggerImport('tasks')">导入配置</button>
-            </div>
-
-            <div class="add-task-form">
-                <label class="form-label" id="form-title">添加新家务</label>
-                <input type="text" id="newTaskName" class="form-input" placeholder="输入家务名称">
-
-                <label class="form-label">奖励数量 (三等功)</label>
-                <div class="counter-input">
-                    <button class="counter-btn" onclick="adjustReward(-1)">-</button>
-                    <input type="number" id="newTaskReward" class="counter-value counter-value-input" value="2" min="1" inputmode="numeric">
-                    <button class="counter-btn" onclick="adjustReward(1)">+</button>
+            <!-- 积分展示条 -->
+            <div class="total-banner">
+                <div class="total-banner-label">
+                    <span>军功总值</span>
+                    <span>累计折合三等功分值</span>
                 </div>
-
-                <div class="task-form-actions">
-                    <button class="btn-primary-main" id="saveTaskBtn" onclick="saveNewOrEditedTask()">保存</button>
-                    <button class="btn-primary-main" id="saveAndRecordTaskBtn" onclick="saveAndRecordTask()">保存并记录</button>
-                    <button class="io-btn task-form-cancel" onclick="resetTaskForm()">取消</button>
+                <div class="total-banner-value">
+                    <!-- 替换为三等功的盾牌徽章 -->
+                    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 24px; height: 24px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));">
+                        <circle cx="32" cy="32" r="28" fill="url(#third-grad)" stroke="#64748b" stroke-width="2"/>
+                        <path d="M24 24 V32 C24 37 32 42 32 42 C32 42 40 37 40 32 V24 Z" fill="#94a3b8" stroke="#475569" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M20 20 C22 28 28 30 30 38" stroke="#475569" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M44 20 C42 28 36 30 34 38" stroke="#475569" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <strong id="total-merits">0</strong>
                 </div>
             </div>
 
-            <div id="manageTaskList"></div>
+            <!-- 底部操作区 -->
+            <div class="action-grid">
+                <button class="action-btn primary" onclick="showModal('completeTaskModal')" aria-label="登记已完成的家务，领取奖励">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                    </svg>
+                    <span>完成家务 · 登记领赏</span>
+                </button>
+
+                <button class="action-btn" onclick="openRedeem()">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20 7h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35L12 5.02l-.5-.67C10.96 3.54 10.05 3 9 3 7.34 3 6 4.34 6 6c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 20c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V9c0-1.11-.89-2-2-2zM15 5c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 5c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V9h5.08L7 11.83 8.62 13 12 8.4l3.38 4.6L17 11.83 14.92 9H20v6z" />
+                    </svg>
+                    <span>功勋兑换</span>
+                </button>
+
+                <button class="action-btn" onclick="showModal('historyModal')">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.14.72-1.21-3.5-1.75V8H12z" />
+                    </svg>
+                    <span>积分明细</span>
+                </button>
+
+                <button class="action-btn" onclick="showModal('manageModal')">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+                    </svg>
+                    <span>家务配置</span>
+                </button>
+            </div>
         </div>
+
+        <!-- 底部抽屉弹窗列表 -->
+
+        <!-- 1. 完成家务抽屉 -->
+        <div id="completeTaskModal" class="modal-drawer">
+            <div class="drawer-overlay" onclick="closeModal('completeTaskModal')"></div>
+            <div class="drawer-content">
+                <div class="drawer-header">
+                    <h2 class="drawer-title">选择完成的任务</h2>
+                    <button class="close-btn" onclick="closeModal('completeTaskModal')" aria-label="关闭">&times;</button>
+                </div>
+                <div class="drawer-body" id="taskList">
+                    <!-- 动态生成任务卡片 -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. 积分明细抽屉 -->
+        <div id="historyModal" class="modal-drawer">
+            <div class="drawer-overlay" onclick="closeModal('historyModal')"></div>
+            <div class="drawer-content">
+                <div class="drawer-header">
+                    <h2 class="drawer-title">积分历史明细</h2>
+                    <button class="close-btn" onclick="closeModal('historyModal')" aria-label="关闭">&times;</button>
+                </div>
+                <div class="drawer-body">
+                    <div class="io-toolbar">
+                        <button class="io-btn" onclick="exportHistory()">导出历史</button>
+                        <button class="io-btn" onclick="triggerImport('history')">导入合并</button>
+                    </div>
+                    <div id="historyList"></div>
+                    <div style="padding: 24px 0 10px; text-align: center;">
+                        <button class="io-btn" style="color:var(--danger-color); width: 100%; border-color: rgba(239, 68, 68, 0.15); background: rgba(239, 68, 68, 0.04);" onclick="clearAllHistory()">清空所有记录 (不可逆)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. 家务配置与管理抽屉 -->
+        <div id="manageModal" class="modal-drawer">
+            <div class="drawer-overlay" onclick="closeModal('manageModal')"></div>
+            <div class="drawer-content">
+                <div class="drawer-header">
+                    <h2 class="drawer-title">家务管理配置</h2>
+                    <button class="close-btn" onclick="closeModal('manageModal')" aria-label="关闭">&times;</button>
+                </div>
+
+                <div class="drawer-body">
+                    <div class="io-toolbar">
+                        <button class="io-btn" onclick="exportTasks()">导出配置</button>
+                        <button class="io-btn" onclick="triggerImport('tasks')">导入配置</button>
+                    </div>
+
+                    <div class="add-task-form">
+                        <label class="form-label" id="form-title">添加新家务</label>
+                        <input type="text" id="newTaskName" class="form-input" placeholder="请输入家务名称，如：擦桌子">
+
+                        <label class="form-label">选择家务图标</label>
+                        <div class="icon-selector-grid" id="iconSelector">
+                            <!-- JS 动态填充图标选项 -->
+                        </div>
+
+                        <label class="form-label">奖励数量 (折合三等功积分)</label>
+                        <div class="counter-input">
+                            <button class="counter-btn" onclick="adjustReward(-1)">-</button>
+                            <input type="number" id="newTaskReward" class="counter-value-input" value="2" min="1" inputmode="numeric">
+                            <button class="counter-btn" onclick="adjustReward(1)">+</button>
+                        </div>
+
+                        <div class="task-form-actions">
+                            <button class="btn-primary-main" id="saveTaskBtn" onclick="saveNewOrEditedTask()">保存任务</button>
+                            <button class="btn-primary-main secondary" id="saveAndRecordTaskBtn" onclick="saveAndRecordTask()">保存并记录</button>
+                            <button class="io-btn" style="flex: 0 0 60px; height: 48px; border-radius: 16px; margin-bottom:0;" onclick="resetTaskForm()">取消</button>
+                        </div>
+                    </div>
+
+                    <div id="manageTaskList"></div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. 兑换奖励抽屉 -->
+        <div id="redeemModal" class="modal-drawer">
+            <div class="drawer-overlay" onclick="closeModal('redeemModal')"></div>
+            <div class="drawer-content">
+                <div class="drawer-header">
+                    <h2 class="drawer-title">消耗功勋兑换心愿</h2>
+                    <button class="close-btn" onclick="closeModal('redeemModal')" aria-label="关闭">&times;</button>
+                </div>
+                <div class="drawer-body">
+                    <div class="add-task-form">
+                        <p id="redeemInfo" style="margin-top: 0; margin-bottom: 20px; color: var(--text-secondary); font-size: 13px; font-weight: 500; text-align: center; line-height: 1.5;"></p>
+                        
+                        <label class="form-label">消耗功勋级别</label>
+                        <div class="redeem-rank-options" id="redeemRankOptions">
+                            <!-- 动态生成 -->
+                        </div>
+
+                        <label class="form-label">消耗奖章数量</label>
+                        <div class="redeem-count-input">
+                            <button class="counter-btn" onclick="adjustRedeemCount(-1)">-</button>
+                            <span class="counter-value" id="redeemCount">1</span>
+                            <button class="counter-btn" onclick="adjustRedeemCount(1)">+</button>
+                        </div>
+
+                        <label class="form-label">想要兑换的心愿内容</label>
+                        <input type="text" id="redeemContent" class="form-input" placeholder="例如：大餐一顿、免洗碗一次、清空购物车...">
+
+                        <button class="btn-primary-main" style="width: 100%;" onclick="confirmRedeem()">确认扣减并兑换</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 全局弹出的信息 Toast -->
+        <div id="toast" class="toast">太棒了！继续加油！</div>
     </div>
 
+    <!-- 粒子礼花画布 -->
+    <canvas id="confettiCanvas"></canvas>
+    
     <input type="file" id="importInput" style="display: none" accept=".json">
-
-    <!-- 兑换弹窗 -->
-    <div id="redeemModal" class="modal">
-        <div class="modal-header">
-            <h2 class="modal-title">兑换军功奖励</h2>
-            <button class="close-btn" onclick="closeModal('redeemModal')">&times;</button>
-        </div>
-        <div class="modal-content">
-            <div class="add-task-form">
-                <p id="redeemInfo" style="margin-bottom: 20px; color: var(--text-secondary); font-size: 15px; font-weight: 700; text-align: center;"></p>
-                <label class="form-label">消耗功勋类型</label>
-                <div class="redeem-rank-options" id="redeemRankOptions"></div>
-                <label class="form-label">消耗数量</label>
-                <div class="redeem-count-input">
-                    <button class="counter-btn" onclick="adjustRedeemCount(-1)">-</button>
-                    <span class="counter-value" id="redeemCount">1</span>
-                    <button class="counter-btn" onclick="adjustRedeemCount(1)">+</button>
-                </div>
-                <label class="form-label">想要兑换的内容</label>
-                <input type="text" id="redeemContent" class="form-input" placeholder="例如：大餐一顿、新游戏、休息一天...">
-
-                <button class="btn-primary-main" style="width: 100%;" onclick="confirmRedeem()">确定兑换</button>
-            </div>
-        </div>
-    </div>
-    <div id="toast" class="toast">太棒了！继续加油！</div>
-    </div>
 
     <script src="app.js"></script>
 </body>
